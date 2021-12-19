@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import NewsItems from "./NewsItems";
-import Spinner from "./Spinner";
+import NewsItems from "../NewsItem/NewsItems";
+import Spinner from "../Spinner";
 import PropTypes from 'prop-types';
 import InfiniteScroll from "react-infinite-scroll-component";
+import './index.css'
 
 const News = (props)=>  {
     const [articles, setArticles] = useState([])
@@ -25,21 +26,12 @@ const News = (props)=>  {
     }
     useEffect(() => {
         updateNews(); 
+        // eslint-disable-next-line
     }, [])
-
-    // const handlePreviousClick = async () => {
-    //     setPage(page-1)
-    //     updateNews();
-    // };
-    // const handleNextClick = async () => {
-    //     setPage(page+1)
-    //     updateNews()
-    // };
 
     const fetchMoreData = async () => {
         const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.api}&page=${page + 1}&pageSize=${props.pageSize}`;
-        setPage(page+1) 
-        // this.setState({ loading: true });
+        setPage(page+1) ;
         let data = await fetch(url);
         let parsedData = await data.json();
         setArticles(articles.concat(parsedData.articles))
@@ -47,13 +39,13 @@ const News = (props)=>  {
     }
         return (
             <>
-                <div className="text-center" style={{marginTop: "70px", marginBottom:"30px"}}>
-                    <h2>NewsFetch - Top Headlines</h2>
+                <div className="text-center">
+                    <h2>iNews - Top {props.category} Headlines</h2>
                 </div>
                 {loading && <Spinner/>}
                 <InfiniteScroll
-                        dataLength={articles.length}
                         next={fetchMoreData}
+                        dataLength={articles.length}
                         hasMore={articles.length !== totalResults}
                         loader={<Spinner/>}
                 >
@@ -75,27 +67,6 @@ const News = (props)=>  {
                         </div>
                     </div>
                 </InfiniteScroll>
-                {/* <div className="container d-flex justify-content-between my-4">
-                    <button
-                        disabled={this.state.page <= 1}
-                        type="button"
-                        className="btn btn-dark"
-                        onClick={this.handlePreviousClick}
-                    >
-                        &larr; Previous
-                    </button>
-                    <button
-                        disabled={Math.ceil(
-                            this.state.page + 1 >
-                            this.state.totalResults / this.props.pageSize
-                        )}
-                        type="button"
-                        className="btn btn-dark"
-                        onClick={this.handleNextClick}
-                    >
-                        Next &rarr;
-                    </button>
-                </div> */}
             </>
         );
 }

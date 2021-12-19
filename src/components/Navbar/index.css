@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Days+One&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: 'Roboto', sans-serif;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.header{
+    /* width: 100vw; */
+    font-family: "Days One", sans-serif;
+    border-bottom: 1px solid #E2E8F0;
+}
+
+.sticky {
+	position: sticky;
+	top: 0;
+	background-color: rgb(255, 255, 255);
+	z-index: 99;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1.5rem;
+    background-color: #262626;
+    margin-bottom: -20px;
+}
+
+.hamburger {
+    display: none;
+}
+
+.bar{
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3 ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: rgb(248, 242, 242);
+}
+
+.nav-menu {
+    display: flex;
+    overflow: hidden;
+    justify-content: space-between;
+    font-family: "Days One", sans-serif;
+    align-items: center;
+    z-index: 6;
+}
+
+.nav-link{
+    display: inline-block;
+    position: relative;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #d8cece;
+    -webkit-transition: background 0.3s linear;
+    -moz-transition: background 0.3s linear;
+    -ms-transition: background 0.3s linear;
+    -o-transition: background 0.3s linear;
+    transition: background 0.3s linear;
+    z-index: 9;
+}
+.nav-link:after{
+    background: none repeat scroll 0 0 transparent;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 15%;
+    position: absolute;
+    background: #ff0000;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+}
+.nav-link:hover:after{
+    width: 70%;
+}
+.nav-link:hover{
+    color: rgb(255, 255, 255);
+}
+
+.nav-logo {
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: #2600ff;
+}
+
+@media only screen and (max-width: 930px) {
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 5rem;
+        flex-direction: column;
+        background-color: #262626;
+        width: 100vw;
+        border-radius: 10px;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow:
+            0 10px 27px rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-menu.active {
+        left: 0%;
+    }
+    .navbar.active{
+        width: 100vw;
+        position: fixed;
+    }
+    .nav-item {
+        margin: 2.0rem 0;
+    }
+
+    .hamburger {
+        display: block;
+        cursor: pointer;
+    }
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+}
